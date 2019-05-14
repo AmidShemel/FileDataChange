@@ -19,8 +19,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
 
-        File[] files1 = folder1.listFiles();
-        File[] files2 = folder2.listFiles();
+        File[] files1 = folder1.listFiles(), files2 = folder2.listFiles();
 
         copyAll(files1);
         copyAll(files2);
@@ -29,9 +28,7 @@ public class Main {
 
     }
 
-
     private static void fileChecker(File[] files1, File[] files2) throws IOException {
-
         for (File f1 : files1) {
             String sf1 = f1.getName();
             for (File f2 : files2) {
@@ -45,24 +42,17 @@ public class Main {
                 }
             }
         }
-
     }
 
     private static void copyFile(File source, File dest) throws IOException {
-
         Files.copy(source.toPath(), dest.toPath(), REPLACE_EXISTING);
-
     }
 
     private static void copyAll(File[] files) throws IOException {
-
         Path p1, p2 = folder3.toPath();
-
         for (File f : files) {
             p1 = f.toPath();
             Files.copy(p1, p2.resolve(p1.getFileName()), REPLACE_EXISTING);
         }
-
     }
-
 }
