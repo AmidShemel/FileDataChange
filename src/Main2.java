@@ -46,17 +46,19 @@ public class Main2 {
     private static void copyAll2(List<File[]> list) throws IOException {
         for (File[] sourceDir : list) {
             for (File sourceFile : sourceDir) {
-                if (Files.exists(destDir.resolve(sourceFile.getName()))) {
-                    System.out.print("exist. ");
-                    if (sourceFile.lastModified() > destDir.resolve(sourceFile.getName()).toFile().lastModified()) {
-                        Files.copy(sourceFile.toPath(), destDir.resolve(sourceFile.getName()), REPLACE_EXISTING);
-                        System.out.println("replased");
+                if (sourceFile.isFile()) {
+                    if (Files.exists(destDir.resolve(sourceFile.getName()))) {
+                        System.out.print("exist. ");
+                        if (sourceFile.lastModified() > destDir.resolve(sourceFile.getName()).toFile().lastModified()) {
+                            Files.copy(sourceFile.toPath(), destDir.resolve(sourceFile.getName()), REPLACE_EXISTING);
+                            System.out.println("replased");
+                        } else {
+                            System.out.println("not replased");
+                        }
                     } else {
-                        System.out.println("not replased");
+                        Files.copy(sourceFile.toPath(), destDir.resolve(sourceFile.getName()));
+                        System.out.println("copied from: " + sourceFile);
                     }
-                } else {
-                    Files.copy(sourceFile.toPath(), destDir.resolve(sourceFile.getName()));
-                    System.out.println("copied from: " + sourceFile);
                 }
             }
         }
