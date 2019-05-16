@@ -31,7 +31,7 @@ public class Main2 {
             fs.add(f.listFiles());
         }
 
-        // Виводить в консоль імена всіх файлів з усіх цільвих папок
+        // Показує в консоль імена всіх файлів з усіх цільвих папок
         for (File[] f : fs) {
             for (File f2 : f) {
                 System.out.print(f2 + ", ");
